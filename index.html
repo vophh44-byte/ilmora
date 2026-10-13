@@ -1,24 +1,698 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#10251f">
-  <meta name="description" content="Ilmora — The Journey of Knowledge. Explore Arabic, English, and Islamic learning.">
-  <title>Ilmora — The Journey of Knowledge</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script src="js/main.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Journey of Knowledge — رِحْلَةُ الْعِلْمِ</title>
+  <meta name="description" content="A Worldwide Islamic Arabic & English Educational Adventure Game. Learn, explore, and grow with structured lessons, authentic sources, and rewarding progression.">
+  
+  <!-- Google Fonts: Amiri (Arabic Classical Typography) & Inter (Clean UI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Free Icons (CDN) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <!-- Master Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23102746'/><path d='M30 70 L50 25 L70 70 Z' fill='%23D6A548'/><circle cx='50' cy='48' r='8' fill='%23087F8C'/></svg>">
 </head>
-<body>
-  <main class="welcome">
-    <div class="brand-mark" aria-hidden="true">عِلْم</div>
-    <p class="eyebrow">THE JOURNEY OF KNOWLEDGE</p>
-    <h1>Welcome to <span>Ilmora</span></h1>
-    <p class="arabic-title" lang="ar" dir="rtl">رِحْلَةُ الْعِلْمِ</p>
-    <p class="intro">Learn. Explore. Grow.</p>
-    <p class="description">A learning adventure for Arabic, English, and carefully sourced Islamic knowledge.</p>
-    <div class="status" role="status"><span class="status-dot"></span><span id="app-status">Your learning journey is being prepared.</span></div>
-    <p class="footer-note">A new journey begins with knowledge.</p>
+<body class="text-size-medium">
+
+  <!-- A11y Live Announcer for Screen Readers -->
+  <div id="a11y-live-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand-wrapper" onclick="window.App.switchView('view-home')">
+        <div class="brand-icon">
+          <i class="fa-solid fa-book-quran"></i>
+        </div>
+        <div class="brand-text">
+          <h1>The Journey of Knowledge</h1>
+          <div class="arabic-title">رِحْلَةُ الْعِلْمِ</div>
+        </div>
+      </div>
+
+      <!-- Main Navigation Menu -->
+      <nav id="main-nav-bar" class="main-nav" aria-label="Main Navigation">
+        <button class="nav-link active" data-target-view="view-home">
+          <i class="fa-solid fa-house"></i> Home
+        </button>
+        <button class="nav-link" data-target-view="view-map">
+          <i class="fa-solid fa-map-location-dot"></i> Adventure Map
+        </button>
+        <button class="nav-link" data-target-view="view-arabic">
+          <i class="fa-solid fa-book-open"></i> Arabic Academy
+        </button>
+        <button class="nav-link" data-target-view="view-english">
+          <i class="fa-solid fa-earth-americas"></i> English Academy
+        </button>
+        <button class="nav-link" data-target-view="view-advanced-tools">
+          <i class="fa-solid fa-graduation-cap"></i> Advanced Tools
+        </button>
+        <button class="nav-link" data-target-view="view-library">
+          <i class="fa-solid fa-mosque"></i> Islamic Library
+        </button>
+        <button class="nav-link" data-target-view="view-dictionary">
+          <i class="fa-solid fa-spell-check"></i> Vocabulary
+        </button>
+        <button class="nav-link" data-target-view="view-progress">
+          <i class="fa-solid fa-chart-line"></i> My Progress
+        </button>
+        <button class="nav-link" data-target-view="view-shop">
+          <i class="fa-solid fa-store"></i> Reward Shop
+        </button>
+        <button class="nav-link" data-target-view="view-admin">
+          <i class="fa-solid fa-shield-halved"></i> Control Centre
+        </button>
+        <button class="nav-link" data-target-view="view-settings">
+          <i class="fa-solid fa-gear"></i> Settings
+        </button>
+      </nav>
+
+      <!-- Status, Keys & Coins Area -->
+      <div class="header-status-area">
+        <div id="header-keys-badge" class="keys-counter-badge" title="Knowledge Keys" style="cursor:pointer;" onclick="window.App.switchView('view-map')">
+          <i class="fa-solid fa-key" style="color:var(--color-gold);"></i>
+          <span id="user-keys-balance">3</span>
+        </div>
+        <div id="header-coin-badge" class="coin-badge" title="Learning Coins Balance">
+          <i class="fa-solid fa-coins"></i>
+          <span id="user-coin-balance">100</span>
+        </div>
+        <button id="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Toggle Navigation Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main View Container -->
+  <main class="main-wrapper">
+
+    <!-- ====================================================================
+         VIEW: HOMEPAGE
+         ==================================================================== -->
+    <section id="view-home" class="view-section active-view">
+      <div class="hero-banner">
+        <div class="hero-content">
+          <div class="hero-tagline">تَعَلَّمْ • اِسْتَكْشِفْ • اِرْتَقِ</div>
+          <h2 class="hero-title">Embark Upon <span>The Journey of Knowledge</span></h2>
+          <p class="hero-description">
+            A worldwide Islamic educational adventure game. Master Arabic from the foundational alphabet to Classical Qur'anic comprehension, and build confident English fluency through verified authentic curriculum, short interactive lessons, and structured progression.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-gold" onclick="window.App.switchView('view-arabic')">
+              <i class="fa-solid fa-compass"></i> Begin Arabic Journey
+            </button>
+            <button class="btn btn-outline" style="border-color:rgba(255,255,255,0.4); color:white;" onclick="window.App.switchView('view-english')">
+              <i class="fa-solid fa-language"></i> Explore English Academy
+            </button>
+            <button class="btn btn-outline" style="border-color:rgba(255,255,255,0.4); color:white;" onclick="window.App.switchView('view-library')">
+              <i class="fa-solid fa-book-bookmark"></i> Islamic Knowledge Library
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Learning Worlds Preview -->
+      <div class="section-heading-bar">
+        <h2><i class="fa-solid fa-map-location-dot" style="color:var(--color-gold);"></i> Curriculum Worlds & Locations</h2>
+      </div>
+      <p class="section-subtitle">
+        Explore thematic worlds designed with pedagogical progression and Islamic safeguards.
+      </p>
+      <div id="home-worlds-preview-grid" class="worlds-grid"></div>
+
+      <!-- Core Pillars Overview -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.25rem; margin-top:2rem;">
+        <div class="islamic-card">
+          <div class="card-arch-header">
+            <h3 style="color:var(--color-primary-navy);"><i class="fa-solid fa-shield-halved" style="color:var(--color-emerald);"></i> Authentic & Verified</h3>
+          </div>
+          <p style="font-size:0.92rem; color:var(--color-text-muted);">
+            Religious sources are thoroughly verified against recognized classical collections with source citations, scholarly gradings, and transparent review statuses. No AI hallucinations.
+          </p>
+        </div>
+
+        <div class="islamic-card">
+          <div class="card-arch-header">
+            <h3 style="color:var(--color-primary-navy);"><i class="fa-solid fa-award" style="color:var(--color-gold);"></i> Checkpoint Exams</h3>
+          </div>
+          <p style="font-size:0.92rem; color:var(--color-text-muted);">
+            Mandatory checkpoint examinations every 5 levels with Easy, Medium, and Hard choices. Achieving the 60% passing requirement unlocks the next 5-level adventure block.
+          </p>
+        </div>
+
+        <div class="islamic-card">
+          <div class="card-arch-header">
+            <h3 style="color:var(--color-primary-navy);"><i class="fa-solid fa-arrows-rotate" style="color:var(--color-turquoise);"></i> Spaced Revision</h3>
+          </div>
+          <p style="font-size:0.92rem; color:var(--color-text-muted);">
+            Concepts and vocabulary items missed during practice or challenges are automatically scheduled for timed revision, increasing intervals upon successful recall.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW: ADVENTURE MAP & MISSIONS
+         ==================================================================== -->
+    <section id="view-map" class="view-section">
+      <div class="section-heading-bar">
+        <h2><i class="fa-solid fa-map-location-dot" style="color:var(--color-gold);"></i> Interactive Adventure Map & Learning Missions</h2>
+        <div class="keys-counter-badge">
+          <i class="fa-solid fa-key" style="color:var(--color-gold);"></i>
+          <span id="adventure-keys-display">3</span> Knowledge Keys Available
+        </div>
+      </div>
+      <p class="section-subtitle">
+        Embark on educational journeys across historical learning centers. Earn Knowledge Keys through authentic practice to unlock advanced academies and mastery realms.
+      </p>
+
+      <!-- Daily & Weekly Educational Missions -->
+      <div class="islamic-card" style="margin-bottom:2rem;">
+        <div class="card-arch-header">
+          <h3 style="color:var(--color-primary-navy);"><i class="fa-solid fa-compass" style="color:var(--color-turquoise);"></i> Active Educational Missions</h3>
+        </div>
+        <p style="font-size:0.9rem; color:var(--color-text-muted); margin-bottom:1rem;">
+          Complete these daily and weekly challenges to reinforce your study habits and earn bonus coins and Knowledge Keys.
+        </p>
+        <div id="active-missions-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem;"></div>
+      </div>
+
+      <!-- Unlockable Map Locations -->
+      <div class="section-heading-bar">
+        <h3><i class="fa-solid fa-landmark-dome" style="color:var(--color-emerald);"></i> Historical Learning Locations</h3>
+      </div>
+      <div id="adventure-locations-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:1.25rem;"></div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW: ARABIC ACADEMY
+         ==================================================================== -->
+    <section id="view-arabic" class="view-section">
+      <div class="section-heading-bar">
+        <h2><i class="fa-solid fa-book-open" style="color:var(--color-turquoise);"></i> Arabic Academy — أَكَادِيمِيَّةُ اللُّغَةِ الْعَرَبِيَّةِ</h2>
+      </div>
+      <p class="section-subtitle">
+        Progress from letter shapes, Tashkeel (Harakat), and connecting script to Nahw, Sarf, and Classical Qur'anic understanding.
+      </p>
+      <div id="arabic-levels-container"></div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW: ENGLISH ACADEMY
+         ==================================================================== -->
+    <section id="view-english" class="view-section">
+      <div class="section-heading-bar">
+        <h2><i class="fa-solid fa-earth-americas" style="color:var(--color-turquoise);"></i> English Academy — أَكَادِيمِيَّةُ اللُّغَةِ الْإِنْجِلِيزِيَّةِ</h2>
+      </div>
+      <p class="section-subtitle">
+        Foundational phonics, core vocabulary, grammar, and respectful conversational skills for learners worldwide.
+      </p>
+      <div id="english-levels-container"></div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW: ADVANCED LEARNING TOOLS
+         ==================================================================== -->
+    <section id="view-advanced-tools" class="view-section">
+      <div class="section-heading-bar">
+        <h2><i class="fa-solid fa-graduation-cap" style="color:var(--color-gold);"></i> Advanced Learning Tools & Studios</h2>
+      </div>
+      <p class="section-subtitle">
+        Specialized educational laboratories designed for in-depth phonetics, grammar mechanics, sentence assembly, and classical analysis.
+      </p>
+
+      <!-- Sub-Tab Navigation for Advanced Tools -->
+      <div class="tools-tab-bar">
+        <button class="tool-tab-btn active" data-tool="reading-lab" onclick="window.App.switchAdvancedToolTab('reading-lab')">
+          <i class="fa-solid fa-microscope"></i> Arabic Reading Lab
+        </button>
+        <button class="tool-tab-btn" data-tool="sentence-builder" onclick="window.App.switchAdvancedToolTab('sentence-builder')">
+          <i class="fa-solid fa-puzzle-piece"></i> Sentence Builder
+        </button>
+        <button class="tool-tab-btn" data-tool="arabic-grammar" onclick="window.App.switchAdvancedToolTab('arabic-grammar')">
+          <i class="fa-solid fa-monument"></i> Arabic Grammar (Nahw & Sarf)
+        </button>
+        <button class="tool-tab-btn" data-tool="english-grammar" onclick="window.App.switchAdvancedToolTab('english-grammar')">
+          <i class="fa-solid fa-book"></i> English Grammar Academy
+        </button>
+        <button class="tool-tab-btn" data-tool="classical-texts" onclick="window.App.switchAdvancedToolTab('classical-texts')">
+          <i class="fa-solid fa-scroll"></i> Classical Text Explorer
+        </button>
+        <button class="tool-tab-btn" data-tool="audio-studio" onclick="window.App.switchAdvancedToolTab('audio-studio')">
+          <i class="fa-solid fa-headphones"></i> Listening & Speaking Studio
+        </button>
+        <button class="tool-tab-btn" data-tool="writing-workshop" onclick="window.App.switchAdvancedToolTab('writing-workshop')">
+          <i class="fa-solid fa-pen-fancy"></i> Writing Workshop
+        </button>
+      </div>
+
+      <!-- Tool Container Containers -->
+      <div id="advanced-tool-content-area"></div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW: ISLAMIC KNOWLEDGE LIBRARY
+         ==================================================================== -->
+    <section id="view-library" class="view-section">
+      <div class="section-heading-bar">
+        <h2><i class="fa-solid fa-mosque" style="color:var(--color-emerald);"></i> Islamic Knowledge Library — مَكْتَبَةُ الْمَعْرِفَةِ الْإِسْلَامِيَّةِ</h2>
+      </div>
+      <p class="section-subtitle">
+        A curated treasury of verified Qur'anic vocabulary, authentic Hadith, Islamic terminology, and classical historical records.
+      </p>
+
+      <!-- Category Filter Pills -->
+      <div class="library-filter-bar">
+        <button class="filter-pill active" data-category="all" onclick="window.App.filterIslamicLibrary('all')">All Entries</button>
+        <button class="filter-pill" data-category="quran" onclick="window.App.filterIslamicLibrary('quran')">Qur'anic Passages</button>
+        <button class="filter-pill" data-category="hadith" onclick="window.App.filterIslamicLibrary('hadith')">Authentic Hadith</button>
+        <button class="filter-pill" data-category="manners" onclick="window.App.filterIslamicLibrary('manners')">Daily Muslim Adab</button>
+        <button class="filter-pill" data-category="terminology" onclick="window.App.filterIslamicLibrary('terminology')">Linguistic Terminology</button>
+        <button class="filter-pill" data-category="history" onclick="window.App.filterIslamicLibrary('history')">Islamic Scholarship</button>
+      </div>
+
+      <div id="islamic-library-grid" class="library-grid"></div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW: VOCABULARY DICTIONARY
+         ==================================================================== -->
+    <section id="view-dictionary" class="view-section">
+      <div class="section-heading-bar">
+        <h2><i class="fa-solid fa-spell-check" style="color:var(--color-gold);"></i> Interactive Vocabulary Dictionary</h2>
+      </div>
+      <p class="section-subtitle">
+        Search, pronounce, and save authentic Arabic words with accurate Tashkeel, root forms, and contextual sentences.
+      </p>
+
+      <div class="dict-search-bar">
+        <input type="text" id="dict-search-input" class="dict-search-input" placeholder="Search words in Arabic, English, or transliteration (e.g. Kitab, Pen, كتاب)..." aria-label="Search Vocabulary">
+      </div>
+
+      <div id="vocab-dictionary-grid" class="vocab-grid"></div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW: PROGRESS DASHBOARD
+         ==================================================================== -->
+    <section id="view-progress" class="view-section">
+      <div class="section-heading-bar">
+        <h2><i class="fa-solid fa-chart-line" style="color:var(--color-turquoise);"></i> Learner Progress & Revision Dashboard</h2>
+      </div>
+      <p class="section-subtitle">
+        Comprehensive overview of your educational achievements, coins earned, and spaced revision schedule.
+      </p>
+
+      <!-- KPI Summary Cards -->
+      <div class="stats-summary-bar">
+        <div class="stat-box">
+          <div id="stat-completed-lessons" class="stat-value">0</div>
+          <div class="stat-label">Lessons Mastered</div>
+        </div>
+        <div class="stat-box">
+          <div id="stat-completed-challenges" class="stat-value">0</div>
+          <div class="stat-label">Level Challenges</div>
+        </div>
+        <div class="stat-box">
+          <div id="stat-passed-checkpoints" class="stat-value">0</div>
+          <div class="stat-label">Checkpoints Passed</div>
+        </div>
+        <div class="stat-box">
+          <div id="stat-ar-lessons" class="stat-value">0</div>
+          <div class="stat-label">Arabic Lessons</div>
+        </div>
+        <div class="stat-box">
+          <div id="stat-en-lessons" class="stat-value">0</div>
+          <div class="stat-label">English Lessons</div>
+        </div>
+        <div class="stat-box">
+          <div id="stat-user-coins" class="stat-value" style="color:var(--color-gold);">0</div>
+          <div class="stat-label">Total Coins</div>
+        </div>
+      </div>
+
+      <!-- Performance-based Smart Recommendations -->
+      <div class="islamic-card" style="margin-bottom:2rem; border-color:var(--color-turquoise);">
+        <div class="card-arch-header">
+          <h3 style="color:var(--color-primary-navy);"><i class="fa-solid fa-lightbulb" style="color:var(--color-gold);"></i> Smart Learning Recommendations</h3>
+        </div>
+        <p style="font-size:0.9rem; color:var(--color-text-muted); margin-bottom:1rem;">
+          Personalized next steps determined by your learning path, recent answers, and curriculum milestones.
+        </p>
+        <div id="smart-recommendations-container" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem;"></div>
+      </div>
+
+      <!-- Spaced Repetition Due Queue -->
+      <div class="islamic-card" style="margin-bottom:2rem;">
+        <div class="card-arch-header">
+          <h3 style="color:var(--color-primary-navy);"><i class="fa-solid fa-arrows-rotate" style="color:var(--color-turquoise);"></i> Spaced Repetition Revision Queue</h3>
+        </div>
+        <p style="font-size:0.9rem; color:var(--color-text-muted); margin-bottom:1rem;">
+          Concepts needing review based on your previous answers. Successfully recalling an item increases its interval.
+        </p>
+        <div id="revision-queue-container"></div>
+      </div>
+
+      <!-- Personal Mistake Notebook -->
+      <div class="islamic-card" style="margin-bottom:2rem;">
+        <div class="card-arch-header">
+          <h3 style="color:var(--color-primary-navy);"><i class="fa-solid fa-book-skull" style="color:var(--color-error);"></i> Personal Mistake Notebook (كُرَّاسَةُ الْأَخْطَاءِ)</h3>
+        </div>
+        <p style="font-size:0.9rem; color:var(--color-text-muted); margin-bottom:1rem;">
+          A dedicated repository tracking incorrect answers from practice exercises, level challenges, and checkpoint exams with correct solutions and grammatical explanations.
+        </p>
+        <div id="mistake-notebook-container"></div>
+      </div>
+
+      <!-- Earned Mastery Badges -->
+      <div class="islamic-card" style="margin-bottom:2rem;">
+        <div class="card-arch-header">
+          <h3 style="color:var(--color-primary-navy);"><i class="fa-solid fa-award" style="color:var(--color-gold);"></i> Earned Mastery Badges</h3>
+        </div>
+        <div id="mastery-badges-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:1rem;"></div>
+      </div>
+
+      <!-- Checkpoint Exam History Table -->
+      <div class="islamic-card">
+        <div class="card-arch-header">
+          <h3 style="color:var(--color-primary-navy);"><i class="fa-solid fa-award" style="color:var(--color-gold);"></i> Checkpoint Examination Records</h3>
+        </div>
+        <div style="overflow-x:auto;">
+          <table style="width:100%; border-collapse:collapse; font-size:0.92rem; text-align:left;">
+            <thead>
+              <tr style="border-bottom:2px solid var(--color-border); color:var(--color-primary-navy);">
+                <th style="padding:0.75rem;">Exam</th>
+                <th style="padding:0.75rem;">Language</th>
+                <th style="padding:0.75rem;">Difficulty</th>
+                <th style="padding:0.75rem;">Score</th>
+                <th style="padding:0.75rem;">Status</th>
+              </tr>
+            </thead>
+            <tbody id="checkpoint-history-table"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW: REWARD SHOP
+         ==================================================================== -->
+    <section id="view-shop" class="view-section">
+      <div class="section-heading-bar">
+        <h2><i class="fa-solid fa-store" style="color:var(--color-gold);"></i> Learning Reward Shop</h2>
+      </div>
+      <p class="section-subtitle">
+        Exchange your earned learning coins for aesthetic themes, badges, and educational stationery. In strict adherence to Islamic ethics, examination passes and knowledge content are never sold.
+      </p>
+
+      <div id="shop-catalog-grid" class="shop-grid" style="margin-bottom:2rem;"></div>
+
+      <div class="islamic-card">
+        <div class="card-arch-header">
+          <h3 style="color:var(--color-primary-navy);"><i class="fa-solid fa-receipt"></i> Recent Coin Transactions</h3>
+        </div>
+        <div id="transactions-log-list"></div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW: OWNER & TEACHER CONTROL CENTRE
+         ==================================================================== -->
+    <section id="view-admin" class="view-section">
+      <div class="section-heading-bar">
+        <h2><i class="fa-solid fa-shield-halved" style="color:var(--color-primary-navy);"></i> Owner & Teacher Control Centre</h2>
+        <span class="admin-badge"><i class="fa-solid fa-screwdriver-wrench"></i> Administrative Architecture</span>
+      </div>
+      <p class="section-subtitle">
+        Curriculum authoring, Islamic religious content review workflows, exam difficulty rules, and student analytics reporting.
+      </p>
+
+      <div style="background:#fff8e6; border:1px solid #ffd591; padding:1rem 1.25rem; border-radius:12px; margin-bottom:1.5rem; font-size:0.9rem; color:#874d00;">
+        <i class="fa-solid fa-circle-exclamation"></i> <strong>System Security Transparency:</strong> This interface provides single-device authoring, review workflows, and configuration prototype tools. True multi-user permissions, authenticated teacher dashboards, and parent cloud portals require a certified, secure backend database.
+      </div>
+
+      <!-- Islamic Content Review Workflow -->
+      <div class="islamic-card" style="margin-bottom:1.5rem;">
+        <div class="card-arch-header">
+          <h3 style="color:var(--color-primary-navy);"><i class="fa-solid fa-check-double" style="color:var(--color-emerald);"></i> Islamic Religious Content Review Workflow</h3>
+        </div>
+        <p style="font-size:0.9rem; color:var(--color-text-muted); margin-bottom:1rem;">
+          In strict compliance with Islamic educational safeguards, all public religious texts must be verified against authentic manuscripts and authoritative scholarship before approval.
+        </p>
+        <div id="admin-islamic-review-table-container"></div>
+      </div>
+
+      <!-- Author New Vocabulary -->
+      <div class="islamic-card" style="margin-bottom:1.5rem;">
+        <div class="card-arch-header">
+          <h3 style="color:var(--color-primary-navy);"><i class="fa-solid fa-plus" style="color:var(--color-turquoise);"></i> Add New Verified Vocabulary Entry</h3>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1rem; margin-bottom:1rem;">
+          <div>
+            <label style="display:block; font-weight:600; font-size:0.88rem; margin-bottom:0.25rem;">Arabic Word (with Tashkeel):</label>
+            <input type="text" id="admin-vocab-arabic" class="settings-input" placeholder="e.g. مَدْرَسَةٌ">
+          </div>
+          <div>
+            <label style="display:block; font-weight:600; font-size:0.88rem; margin-bottom:0.25rem;">Transliteration:</label>
+            <input type="text" id="admin-vocab-translit" class="settings-input" placeholder="e.g. Madrasatun">
+          </div>
+          <div>
+            <label style="display:block; font-weight:600; font-size:0.88rem; margin-bottom:0.25rem;">English Meaning:</label>
+            <input type="text" id="admin-vocab-english" class="settings-input" placeholder="e.g. School">
+          </div>
+          <div>
+            <label style="display:block; font-weight:600; font-size:0.88rem; margin-bottom:0.25rem;">Part of Speech & Plural:</label>
+            <input type="text" id="admin-vocab-pos" class="settings-input" placeholder="e.g. Noun | Plural: مَدَارِسُ">
+          </div>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="window.App.submitAdminVocabulary()">
+          <i class="fa-solid fa-save"></i> Save to Vocabulary Bank
+        </button>
+      </div>
+
+      <!-- Examination & Reward Configurations -->
+      <div class="islamic-card" style="margin-bottom:1.5rem;">
+        <div class="card-arch-header">
+          <h3 style="color:var(--color-primary-navy);"><i class="fa-solid fa-sliders" style="color:var(--color-gold);"></i> System Calibration: Passing Scores & Coin Economics</h3>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin-bottom:1rem;">
+          <div>
+            <label style="display:block; font-weight:600; font-size:0.88rem; margin-bottom:0.25rem;">Checkpoint Passing Threshold (%):</label>
+            <input type="number" id="admin-passing-threshold" class="settings-input" value="60" min="50" max="90">
+          </div>
+          <div>
+            <label style="display:block; font-weight:600; font-size:0.88rem; margin-bottom:0.25rem;">Lesson Completion Coins:</label>
+            <input type="number" id="admin-lesson-reward" class="settings-input" value="15" min="5" max="50">
+          </div>
+          <div>
+            <label style="display:block; font-weight:600; font-size:0.88rem; margin-bottom:0.25rem;">Checkpoint Exam Passed Coins:</label>
+            <input type="number" id="admin-checkpoint-reward" class="settings-input" value="50" min="20" max="200">
+          </div>
+        </div>
+        <button class="btn btn-gold btn-sm" onclick="window.App.submitAdminSystemConfig()">
+          <i class="fa-solid fa-check"></i> Apply System Calibration
+        </button>
+      </div>
+
+      <!-- Teacher & Parent Progress Report Generator -->
+      <div class="islamic-card">
+        <div class="card-arch-header">
+          <h3 style="color:var(--color-primary-navy);"><i class="fa-solid fa-file-invoice" style="color:var(--color-turquoise);"></i> Educator & Parent Progress Summary Report</h3>
+        </div>
+        <p style="font-size:0.9rem; color:var(--color-text-muted); margin-bottom:1rem;">
+          Compile real-time learner mastery data into a printable and exportable educational audit.
+        </p>
+        <button class="btn btn-outline btn-sm" onclick="window.App.generateTeacherReport()">
+          <i class="fa-solid fa-file-lines"></i> Generate Progress Report
+        </button>
+        <div id="admin-teacher-report-output" style="margin-top:1rem;"></div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW: SETTINGS
+         ==================================================================== -->
+    <section id="view-settings" class="view-section">
+      <div class="section-heading-bar">
+        <h2><i class="fa-solid fa-gear" style="color:var(--color-primary-navy);"></i> Settings & Accessibility</h2>
+      </div>
+      <p class="section-subtitle">
+        Configure layout direction, text sizing, learning tier, and manage single-device storage data.
+      </p>
+
+      <div class="settings-section-card">
+        <div class="card-arch-header">
+          <h3 style="color:var(--color-primary-navy);"><i class="fa-solid fa-universal-access"></i> Accessibility & Display</h3>
+        </div>
+
+        <div class="settings-field-group">
+          <label for="settings-direction-select">Interface Direction / Layout:</label>
+          <select id="settings-direction-select" class="settings-select">
+            <option value="ltr">LTR (Left-to-Right / English Primary)</option>
+            <option value="rtl">RTL (Right-to-Left / Arabic Primary)</option>
+          </select>
+        </div>
+
+        <div class="settings-field-group">
+          <label for="settings-textsize-select">Font Sizing Scale:</label>
+          <select id="settings-textsize-select" class="settings-select">
+            <option value="small">Compact (Small)</option>
+            <option value="medium">Standard (Medium)</option>
+            <option value="large">Enlarged (Large Accessibility)</option>
+          </select>
+        </div>
+
+        <div class="settings-field-group">
+          <label style="display:inline-flex; align-items:center; gap:0.5rem; cursor:pointer;">
+            <input type="checkbox" id="settings-reduced-motion">
+            <span>Enable Reduced Motion (Disable transitions and animations)</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="settings-section-card">
+        <div class="card-arch-header">
+          <h3 style="color:var(--color-primary-navy);"><i class="fa-solid fa-user-graduate"></i> Learner Profile & Tier</h3>
+        </div>
+
+        <div class="settings-field-group">
+          <label for="settings-learner-name">Learner Display Name:</label>
+          <input type="text" id="settings-learner-name" class="settings-input" placeholder="Enter your name">
+        </div>
+
+        <div class="settings-field-group">
+          <label for="settings-tier-select">Learning Tier:</label>
+          <select id="settings-tier-select" class="settings-select">
+            <option value="beginner">Beginner (Foundations, Alphabet, Phonics)</option>
+            <option value="basic">Basic (Vocabulary, Sentences, Conversation)</option>
+            <option value="pro">Pro (Grammar, Nahw, Sarf, Classical Passages)</option>
+          </select>
+        </div>
+
+        <button id="save-settings-btn" class="btn btn-primary">
+          <i class="fa-solid fa-floppy-disk"></i> Save Settings
+        </button>
+      </div>
+
+      <div class="settings-section-card" style="border-color:#f8d7da;">
+        <div class="card-arch-header">
+          <h3 style="color:var(--color-error);"><i class="fa-solid fa-triangle-exclamation"></i> Data Management & Privacy</h3>
+        </div>
+        <p style="font-size:0.9rem; color:var(--color-text-muted); margin-bottom:1rem;">
+          Your learning progress is saved locally on this browser. You can export a JSON backup file or perform a complete progress reset.
+        </p>
+
+        <div style="display:flex; flex-wrap:wrap; gap:1rem;">
+          <button id="export-backup-btn" class="btn btn-outline">
+            <i class="fa-solid fa-file-export"></i> Export Progress Backup (JSON)
+          </button>
+          <button id="reset-progress-btn" class="btn btn-outline" style="border-color:var(--color-error); color:var(--color-error);">
+            <i class="fa-solid fa-trash-can"></i> Reset All Progress
+          </button>
+        </div>
+      </div>
+    </section>
+
   </main>
+
+  <!-- ====================================================================
+       INTERACTIVE LESSON / QUIZ RUNNER MODAL
+       ==================================================================== -->
+  <div id="lesson-runner-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="lesson-modal-title">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 id="lesson-modal-title">Interactive Lesson</h3>
+        <button class="modal-close-btn" aria-label="Close dialog">&times;</button>
+      </div>
+      <div id="lesson-modal-body" class="modal-body"></div>
+      <div id="lesson-modal-footer" class="modal-footer"></div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       CHECKPOINT DIFFICULTY SELECTOR MODAL
+       ==================================================================== -->
+  <div id="checkpoint-selector-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="checkpoint-modal-title">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 id="checkpoint-modal-title">Checkpoint Examination</h3>
+        <button class="modal-close-btn" aria-label="Close dialog">&times;</button>
+      </div>
+      <div id="checkpoint-modal-body" class="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       ONBOARDING / PLACEMENT MODAL
+       ==================================================================== -->
+  <div id="placement-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="placement-modal-title">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 id="placement-modal-title">Welcome to The Journey of Knowledge</h3>
+        <button class="modal-close-btn" aria-label="Close dialog">&times;</button>
+      </div>
+      <div id="placement-modal-body" class="modal-body"></div>
+      <div class="modal-footer">
+        <span></span>
+        <button class="btn btn-gold" onclick="window.App.finishOnboarding(true)">
+          Confirm & Begin Journey <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h4>The Journey of Knowledge</h4>
+        <div class="arabic">رِحْلَةُ الْعِلْمِ — تَعَلَّمْ • اِسْتَكْشِفْ • اِرْتَقِ</div>
+        <p style="font-size:0.85rem; margin-top:0.5rem;">
+          A worldwide educational platform combining language mastery in Arabic and English with authentic Islamic knowledge.
+        </p>
+      </div>
+      <div class="footer-links">
+        <h5 style="color:var(--color-white); margin-bottom:0.75rem;">Navigation</h5>
+        <ul>
+          <li><button onclick="window.App.switchView('view-arabic')">Arabic Academy</button></li>
+          <li><button onclick="window.App.switchView('view-english')">English Academy</button></li>
+          <li><button onclick="window.App.switchView('view-library')">Islamic Knowledge Library</button></li>
+          <li><button onclick="window.App.switchView('view-dictionary')">Vocabulary Dictionary</button></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5 style="color:var(--color-white); margin-bottom:0.75rem;">Ethical Standards</h5>
+        <p style="font-size:0.83rem;">
+          Religious texts adhere to verified manuscript sources and recognized scholarly gradings. Non-monetary learning rewards with zero gambling mechanics.
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 The Journey of Knowledge (رِحْلَةُ الْعِلْمِ). Developed for global learners and seekers of knowledge.
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data/config.js"></script>
+  <script src="js/data/courses.js"></script>
+  <script src="js/data/lessons.js"></script>
+  <script src="js/data/questions.js"></script>
+  <script src="js/data/islamic-library.js"></script>
+  <script src="js/data/advanced-tools.js"></script>
+  <script src="js/data/gamification.js"></script>
+  <script src="js/modules/storage.js"></script>
+  <script src="js/modules/rewards.js"></script>
+  <script src="js/modules/revision.js"></script>
+  <script src="js/modules/progression.js"></script>
+  <script src="js/modules/admin.js"></script>
+  <script src="js/modules/accessibility.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
